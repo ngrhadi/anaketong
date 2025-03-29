@@ -86,7 +86,7 @@ const { title, displayHeaderAndFooter = true } = Astro.props;
                   <li><a href="/">Home</a></li>
                   <li>
                     <div class="dropdown dropdown-hover dropdown-end w-full">
-                      <a href="/work/1">Projects</a>
+                      <a href="/project/1">Projects</a>
                       <ul
                         tabindex="0"
                         class="dropdown-content menu bg-primary text-secondary-content rounded-box z-[1] w-[20rem] p-2 shadow"
@@ -94,7 +94,7 @@ const { title, displayHeaderAndFooter = true } = Astro.props;
                         {
                           dataProject.map((item) => (
                             <li class="flex-wrap p-2">
-                              <a href={`/work/${item.data.slug}`}>
+                              <a href={`/project/${item.data.slug}`}>
                                 {item.data.title}
                               </a>
                             </li>
@@ -129,13 +129,13 @@ const { title, displayHeaderAndFooter = true } = Astro.props;
                 class="menu menu-lg dropdown-content bg-base-100 rounded-box z-[1] mt-3 min-w-screen h-screen p-2 shadow absolute"
               >
                 <li class="text-xl"><a href="/">Home</a></li>
-                <li class="text-xl"><a href="/work/1">Projects</a></li>
+                <li class="text-xl"><a href="/project/1">Projects</a></li>
                 <li class="flex flex-col max-h-[60%]">
                   <ul class="p-2 overflow-y-auto">
                     {
                       dataProject.map((item) => (
                         <li class="flex-wrap">
-                          <a href={`/work/${item.data.slug}`}>
+                          <a href={`/project/${item.data.slug}`}>
                             {item.data.title}
                           </a>
                         </li>
@@ -192,7 +192,7 @@ const { title, displayHeaderAndFooter = true } = Astro.props;
           >
             <div class="flex lg:flex-col gap-5 justify-center mt-6 lg:mt-0 lg:justify-start">
               <a href="/">Home</a>
-              <a href="/work/1">Projects</a>
+              <a href="/project/1">Projects</a>
               <a href="/about">About</a>
             </div>
             <div class="font-light lg:text-start text-center w-full lg:mt-auto mt-10 text-[10px]">

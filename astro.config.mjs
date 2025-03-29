@@ -10,7 +10,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   redirects: {
-    '/work': '/work/1'
+      '/project': '/project/1'
   },
   experimental: {
     responsiveImages: true,
@@ -18,10 +18,10 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) =>
-        page !== 'https://anaketong.web.id/work/1' &&
-        page !== 'https://anaketong.web.id/work/2' &&
-        page !== 'https://anaketong.web.id/work/3' &&
-        page !== 'https://anaketong.web.id/about'
+            page !== 'https://anaketong.web.id/project/1' &&
+            page !== 'https://anaketong.web.id/project/2' &&
+            page !== 'https://anaketong.web.id/project/3' &&
+            page !== 'https://anaketong.web.id/about'
     })
   ],
 });
