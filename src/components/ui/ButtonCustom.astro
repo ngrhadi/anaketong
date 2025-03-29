@@ -1,0 +1,68 @@
+---
+interface Props {
+  id?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary' | 'danger' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+}
+
+const {
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  id = 'astro-button',
+} = Astro.props as Props;
+
+const baseClasses =
+  'rounded-md font-medium transition-all duration-200 ease-in-out';
+const sizeClasses: Record<string, string> = {
+  sm: 'px-3 py-1 text-sm',
+  md: 'px-4 py-2 text-base',
+  lg: 'px-6 py-3 text-lg',
+};
+const variantClasses: Record<string, string> = {
+  primary: 'bg-primary text-secondary-content',
+  secondary: 'bg-secondary text-primary-content',
+  danger: 'bg-red-500 text-white',
+  outline: 'border border-gray-500 text-gray-500',
+};
+
+const buttonClasses = `${baseClasses} ${sizeClasses[size] || sizeClasses.md} ${variantClasses[variant] || variantClasses.primary} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
+---
+
+<div class="bg-black w-full rounded-md border-r-2 border-b-2 border-black">
+  <button
+    id={id}
+    type={type}
+    class={buttonClasses +
+      'border-2 border-black border-r-4 flex gap-4 justify-center border-b-4 hover:cursor-pointer disabled:cursor-not-allowed w-full transition-transform duration-200 ease-in-out hover:-translate-x-1 hover:-translate-y-1'}
+    disabled={disabled}
+  >
+    <slot />
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // id work
+    const tag_work = document.getElementById('tag_work');
+    const workSection = document.getElementById('work');
+    if (tag_work && workSection) {
+      tag_work.addEventListener('click', (e) => {
+        e.preventDefault();
+        workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    // route work
+    const route_work = document.getElementById('route_work');
+    if (route_work && workSection) {
+      route_work.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/work/1';
+      });
+    }
+  });
+</script>

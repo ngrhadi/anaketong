@@ -1,0 +1,45 @@
+---
+interface Props {
+  type?: 'filled' | 'outlined';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  isFull?: boolean;
+}
+
+const {
+  type = 'filled',
+  size = 'md',
+  disabled = false,
+  isFull = true,
+} = Astro.props as Props;
+
+const baseClasses =
+  'rounded-md font-medium transition-all duration-200 ease-in-out';
+const sizeClasses: Record<string, string> = {
+  sm: 'p-1 px-2 text-sm',
+  md: 'p-2 text-base',
+  lg: 'p-4 text-lg',
+};
+
+const buttonClasses = `${baseClasses} ${sizeClasses[size] || sizeClasses.md} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
+---
+
+<div
+  class={type === 'filled'
+    ? 'bg-black  max-h-fit min-h-fit rounded-md border-r-2 border-b-2 border-black'
+    : ' max-h-fit min-h-fit rounded-md' +
+      (isFull ? ' w-full min-w-full' : ' max-w-fit min-w-fit')}
+>
+  <div
+    class={buttonClasses +
+    ((type === 'filled'
+      ? ' bg-white border-2 border-black border-r-4 border-b-4 hover:cursor-pointer'
+      : ' border-2 border-primary text-primary hover:cursor-pointer bg-base-100 shadow shadow-primary') +
+    (isFull
+      ? ' w-full min-w-full'
+      : ' max-w-fit min-w-fit')) +
+        ' hover:cursor-pointer disabled:cursor-not-allowed max-h-fit min-h-fit transition-transform duration-200 ease-in-out hover:-translate-x-1 hover:-translate-y-1'}
+  >
+    <slot />
+  </div>
+</div>

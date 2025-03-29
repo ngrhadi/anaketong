@@ -1,0 +1,150 @@
+---
+import { getCollection } from 'astro:content';
+import type { PaginateFunction } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/ui/card.astro';
+import { Image } from 'astro:assets';
+import Link from '../../components/ui/LinkCustom.astro';
+
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction;
+}) {
+  const ITEMS_PER_PAGE = 6;
+  const allProjects = (await getCollection('project')).sort((a, b) => {
+    const dateA = new Date(a.data.createdDate); // MM-DD-YYYY
+    const dateB = new Date(b.data.createdDate);
+    return dateB.getTime() - dateA.getTime(); // Sort descending (newest first)
+  });
+
+  return paginate(
+    allProjects.map((project) => ({
+      id: project.id,
+      title: project.data.title,
+      cover: project.data.cover,
+      coverAlt: project.data.coverAlt,
+      created: project.data.created,
+      slug: project.data.slug,
+      tags: project.data.tags,
+    })),
+    { pageSize: ITEMS_PER_PAGE }
+  );
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="Work">
+  <div
+    class="grid lg:grid-cols-2 grid-cols-1 gap-8 lg:px-28 px-4 lg:pb-10 pb-2 pt-4"
+  >
+    {
+      page.data.map((post) => (
+        <div>
+          <Card size="sm">
+            <a href={`/work/${post.slug}`}>
+              <Image
+                src={post.cover}
+                width={post.cover.width}
+                height={post.cover.height}
+                alt={post.coverAlt}
+              />
+            </a>
+          </Card>
+          <div class="flex flex-col gap-4 mt-4">
+            <div class="flex-1 flex gap-4 flex-wrap">
+              {post.tags.map((item) => (
+                <Card size="sm" type="outlined">
+                  {item}
+                </Card>
+              ))}
+            </div>
+            <div class="flex flex-col">
+              <a href={`/work/${post.slug}`}>
+                <div class="lg:text-2xl font-medium">{post.title}</div>
+              </a>
+              <div class="lg:text-xl text-md font-extralight">
+                {post.created}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="flex flex-row min-w-full justify-between pb-20 lg:px-28 px-4">
+    <div class="flex w-full justify-start max-w-fit"
+      >{
+        page.url.prev && (
+          <Link href={page.url.prev} variant="primary" id="button-prev-work">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              />
+            </svg>
+          </Link>
+        )
+      }
+    </div>
+    <div class="flex w-full justify-center max-w-fit">
+      {
+        Array.from({ length: Math.min(3, page.lastPage) }, (_, i) => {
+          let pageNum = page.currentPage - 1 + i;
+
+          // Ensure valid page numbers
+          if (page.currentPage === 1) pageNum = i + 1;
+          if (page.currentPage === page.lastPage)
+            pageNum = page.lastPage - 2 + i;
+
+          // Avoid going out of range
+          pageNum = Math.max(1, Math.min(pageNum, page.lastPage));
+
+          return (
+            <div class="max-w-fit">
+              <Link
+                href={`/work/${pageNum}`}
+                variant={page.currentPage === pageNum ? 'primary' : 'secondary'}
+                id={`page-work-${pageNum}`}
+              >
+                {pageNum}
+              </Link>
+            </div>
+          );
+        })
+      }
+    </div>
+    <div class="flex w-full justify-end max-w-fit">
+      {
+        page.url.next && (
+          <Link href={page.url.next} variant="primary" id="button-next-work">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </Link>
+        )
+      }
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,288 @@
+---
+import { Image } from 'astro:assets';
+import { marked } from 'marked';
+import Button from './ui/ButtonCustom.astro';
+import Card from './ui/card.astro';
+import CardFull from './ui/card-full.astro';
+import history from '../assets/icons/history.svg';
+import ME from '../assets/img/me_transparant.png';
+import idnGuessr from '../assets/img/project/idn-guessr.png';
+import earthquake from '../assets/img/project/earthquake.png';
+import digitizing from '../assets/img/project/digitation-app.png';
+import zipUsa from '../assets/img/project/zip-usa.png';
+
+const introduction =
+  'I create and maintain **scalable software**, from **web apps** until **automation tools**. Focused on **efficiency, reliability, and usability**.  ';
+const mdIntro = marked.parse(introduction);
+
+const expertise = [
+  'Comprehensive Web Solutions 💻',
+  'End-to-End Web Services 🌐',
+  'API Development & Management 🚠',
+  'Visualization Spatial Data 🌇',
+  'Spatial Data Analysis 📊',
+  'Spatial Database 🐘',
+  'Containerized Deployments 🐳',
+  'Infrastucture Web Services 🚧',
+  'AI Integration with Custom API 🤖',
+];
+
+const content = [
+  {
+    id: '3',
+    icon: history,
+    content: [
+      {
+        text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed autem doloribus quod tenetur possimus provident?',
+      },
+      {
+        date: 'May 2023 - present',
+        company: 'IMP Studio',
+        position: 'Software Engineer',
+        site: 'https://impstudio.id/',
+      },
+      {
+        date: 'Jan 2023 - May 2023',
+        company: 'PUPR Riau',
+        position: 'Backend Engineer Mobile App',
+        site: 'https://panglima.riau.go.id/',
+      },
+      {
+        date: 'Aug 2022 - Feb 2023',
+        company: 'Entrust Digital X BRI',
+        position: 'Fullstack Developer',
+        site: 'https://bri.co.id/',
+      },
+      {
+        date: 'Aug 2021 - Jun 2022',
+        company: 'Strato Solutions, Sdm.bhd',
+        position: 'GIS Programmer',
+        site: 'https://www.stratosolutions.com.my/',
+      },
+      {
+        date: 'Aug 2020 - present',
+        company: 'Freelance',
+        position: 'Upwork',
+        site: 'https://www.upwork.com/freelancers/~0100a0eff9b9c49f3f',
+      },
+      {
+        date: 'Jan 2020 - Aug 2021',
+        company: 'Geologist',
+        position: 'PT Mahika Tjipta Abadi',
+        site: '-',
+      },
+      {
+        date: 'Dec 2018 - Dec 2019',
+        company: 'GIS Analysis',
+        position: 'Indogeo Enterprice',
+        site: 'http://indogeo.org/',
+      },
+    ],
+  },
+];
+---
+
+<div class="flex-1 flex flex-col p-6 text-white">
+  <div class="items-start flex text-primary-content lg:px-28 lg:pb-5 pb-2">
+    <div
+      class="flex w-full items-center flex-row justify-between lg:gap-10 gap-4"
+    >
+      <div class="flex flex-col lg:gap-10 gap-2">
+        <div class="lg:text-xl text-md font-light"> Hi there, I'm Adi 🚀 </div>
+        <div class="lg:text-5xl text-2xl">
+          I'm a <span class="font-bold text-primary">Software Engineer</span> with
+          background on <span class="font-bold text-primary">Earth Science</span
+          >
+        </div>
+        <div class="lg:text-xl text-md font-light hidden lg:block">
+          <article set:html={mdIntro} />
+        </div>
+      </div>
+      <Card size="md" type="filled">
+        <Image
+          src={ME}
+          alt="ME"
+          width="150"
+          height="200"
+          class="w-48 lg:w-56 h-auto"
+        />
+      </Card>
+    </div>
+  </div>
+  <div
+    class="lg:text-xl text-md font-light lg:px-28 lg:pb-5 pb-2 lg:hidden block"
+  >
+    <article set:html={mdIntro} />
+  </div>
+  <div class="flex gap-6 lg:text-xl text-md font-light lg:px-28 pb-10">
+    <Button type="button" id="tag_work" variant="primary" size="md"
+      >See My Work <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+        ></path>
+      </svg>
+    </Button>
+  </div>
+  <!-- section primary highlight content -->
+  <section
+    id="work"
+    class="flex-1 items-start flex-col flex text-primary-content lg:px-28 pt-10 lg:pb-20 pb-10"
+  >
+    <div class="flex lg:flex-row flex-col gap-8">
+      <div class="flex flex-col lg:gap-16 gap-14 lg:pt-40">
+        <div class="flex flex-col gap-4">
+          <!-- /work/idn-guessr get from in variable slug in folder data file idn guessr -->
+          <a href="/work/idn-guessr">
+            <Card size="md" type="filled">
+              <Image
+                src={idnGuessr}
+                width={idnGuessr.width}
+                height={idnGuessr.height}
+                alt="idn-guessr"
+              />
+            </Card>
+          </a>
+          <div class="flex-1 flex gap-4 flex-wrap">
+            <Card size="sm" type="outlined">Personal Project</Card>
+            <Card size="sm" type="outlined">Ongoing</Card>
+            <Card size="sm" type="outlined">GIS</Card>
+            <Card size="sm" type="outlined">Fullstack</Card>
+          </div>
+          <div class="flex flex-col">
+            <div class="lg:text-2xl font-medium">IDN GUESSR</div>
+            <div class="lg:text-xl text-md font-extralight"
+              >Full-stack application designed for managing spatial databases
+              and survey data</div
+            >
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <a href="/work/digitizing-app">
+            <Card size="md" type="filled">
+              <Image
+                src={digitizing}
+                width={digitizing.width}
+                height={digitizing.height}
+                alt="digi"
+              />
+            </Card>
+          </a>
+          <div class="flex-1 flex gap-4 flex-wrap">
+            <Card size="sm" type="outlined">Company Project</Card>
+            <Card size="sm" type="outlined">GIS</Card>
+            <Card size="sm" type="outlined">Fullstack</Card>
+            <Card size="sm" type="outlined">Automation</Card>
+            <Card size="sm" type="outlined">Visualization</Card>
+          </div>
+          <div class="flex flex-col">
+            <div class="lg:text-2xl font-medium">DIGITIZING APP</div>
+            <div class="lg:text-xl text-md font-extralight"
+              >Internal GIS application designed to streamline the digitization
+              and validation process of spatial data</div
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:gap-16 gap-14">
+        <div class="flex flex-col gap-4">
+          <a href="/work/earthquake-realtime">
+            <Card size="md" type="filled">
+              <Image
+                src={earthquake}
+                width={earthquake.width}
+                height={earthquake.height}
+                alt="eq"
+              />
+            </Card>
+          </a>
+          <div class="flex-1 flex gap-4 flex-wrap">
+            <Card size="sm" type="outlined">Personal Project</Card>
+            <Card size="sm" type="outlined">GIS</Card>
+            <Card size="sm" type="outlined">Fullstack</Card>
+            <Card size="sm" type="outlined">Automation</Card>
+            <Card size="sm" type="outlined">Visualization</Card>
+          </div>
+          <div class="flex flex-col">
+            <div class="lg:text-2xl font-medium">IDN EARTHQUAKE REALTIME</div>
+            <div class="lg:text-xl text-md font-extralight"
+              >Full-stack application that provides real-time earthquake
+              information with timestamp visualizations</div
+            >
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <a href="/work/usa-mapbox">
+            <Card size="md" type="filled">
+              <Image
+                src={zipUsa}
+                width={zipUsa.width}
+                height={zipUsa.height}
+                alt="zipusa"
+              />
+            </Card>
+          </a>
+          <div class="flex-1 flex gap-4 flex-wrap">
+            <Card size="sm" type="outlined">Freelance Project</Card>
+            <Card size="sm" type="outlined">Fullstack</Card>
+            <Card size="sm" type="outlined">GIS</Card>
+            <Card size="sm" type="outlined">Visualization</Card>
+          </div>
+          <div class="flex flex-col">
+            <div class="lg:text-2xl font-medium"
+              >ZIP CODE USA ADMINISTRATION</div
+            >
+            <div class="lg:text-xl text-md font-extralight"
+              >Geocoding and visualization of ZIP code regions across the United
+              States</div
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex w-full lg:flex-row flex-col lg:pt-0 pt-7 justify-between">
+      <div class="w-full"></div>
+      <Button type="button" id="route_work" variant="primary"
+        >See All My Work <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+          ></path>
+        </svg>
+      </Button>
+    </div>
+  </section>
+  <div class="items-start flex text-primary-content lg:px-28 lg:pb-5 pb-2">
+    <div class="lg:text-5xl text-2xl"> Experties </div>
+  </div>
+  <div class="items-start flex text-primary-content lg:px-28 lg:pb-20 pb-10">
+    <div class="flex-1 flex flex-wrap gap-6">
+      {
+        expertise.map((item) => (
+          <CardFull size="sm">
+            <span class="text-black">{item}</span>
+          </CardFull>
+        ))
+      }
+    </div>
+  </div>
+</div>
